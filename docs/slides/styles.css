@@ -1,0 +1,7 @@
+.highlight {
+  --col: #ffeb51;           /* default highlight color */
+  background: var(--col, #fff);
+  padding: .1em;
+  border-radius: 5px;
+  display: inline-block;
+}

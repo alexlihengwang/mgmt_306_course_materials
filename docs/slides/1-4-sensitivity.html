@@ -30,6 +30,7 @@
     }
   </style>
   <link rel="stylesheet" href="1-4-sensitivity_files/libs/revealjs/dist/theme/quarto-5ae9c59b2727fcd5357d4f034d95f9e0.css">
+  <link rel="stylesheet" href="styles.css">
   <link href="1-4-sensitivity_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="1-4-sensitivity_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="1-4-sensitivity_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -165,7 +166,7 @@ Alex L. Wang
 <ul>
 <li>Use Excel’s Sensitivity Report</li>
 <li>Possible to determine how optimal solution and optimal objective value are affected by small changes in model</li>
-<li><span class="alert">Without having to re-solve LP</span></li>
+<li><span class="highlight">Without having to re-solve LP</span></li>
 </ul></li>
 </ul>
 </section>
@@ -179,7 +180,7 @@ Alex L. Wang
 <li>One constraint right-hand side (RHS) changes?</li>
 </ul></li>
 </ul>
-<p><span class="alert">Note</span>: only one change</p>
+<p><span class="highlight">Note</span>: only one change</p>
 </section>
 <section>
 <section id="example-fresh-farms" class="title-slide slide level1 center" data-background-color="#40666e">
@@ -214,11 +215,11 @@ Alex L. Wang
 <section id="graphical-solution" class="slide level2">
 <h2>Graphical Solution</h2>
 
-<img data-src=".png" class="r-stretch"></section>
+<img data-src="fig/fresh_farms_graphical_sol.png" class="quarto-figure quarto-figure-center r-stretch" alt="Graphical solution of Fresh Farms problem"></section>
 <section id="spreadsheet-solution" class="slide level2">
 <h2>Spreadsheet Solution</h2>
 
-<img data-src=".png" class="r-stretch"></section></section>
+<img data-src="fig/fresh_farms_excel.png" class="quarto-figure quarto-figure-center r-stretch" alt="Spreadsheet solution of Fresh Farms problem"></section></section>
 <section>
 <section id="changing-one-objective-coefficient" class="title-slide slide level1 center" data-background-color="#40666e">
 <h1>Changing one objective coefficient</h1>
@@ -227,12 +228,14 @@ Alex L. Wang
 <section id="changing-one-objective-function-coefficient" class="slide level2">
 <h2>Changing one objective function coefficient</h2>
 <ul>
-<li>Suppose we change the unit profit of wheat and re-solve the LP for each possible value of the profit coefficient. We would see the following plot:</li>
+<li>Suppose we change the unit profit of wheat and re-solve the LP for each possible value of the profit coefficient. We would see the plot below:
+<ul>
 <li>Near the current coefficient, the optimal total profit varies linearly.</li>
 <li>We can learn most of this information from the sensitivity report without re-solving</li>
+</ul></li>
 </ul>
 
-<img data-src=".png" class="r-stretch"></section>
+<img data-src="fig/parameter_analysis_ff_wheat_unit_profit.png" class="quarto-figure quarto-figure-center r-stretch" alt="Plot showing how Optimal Total Profit varies as a function of Unit Profit on Wheat. The graph shows an increasing function that curves upwards."></section>
 <section id="original-model" class="slide level2">
 <h2>Original model</h2>
 <p>Changing the coefficient in the objective function changes the slope of the objective function line</p>
@@ -246,12 +249,15 @@ Alex L. Wang
 &amp; w,c\geq 0 &amp;&amp;
 \end{aligned}\]</span></p>
 </div><div class="column" style="width:50%;">
-<p><img data-src=".png"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/fresh_farms_graphical_solution_objective1.png" class="quarto-figure quarto-figure-center" alt="Graphical solution of Fresh Farms problem. The slope of the objective function line is -200/300."></p>
+</figure>
+</div>
 </div></div>
 </section>
 <section id="behavior-under-small-change-in-objective-coefficient" class="slide level2">
 <h2>Behavior under “small” change in objective coefficient</h2>
-<p>Changing the coefficient in the objective function changes the slope of the objective function line</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="math display">\[\begin{aligned}
@@ -261,20 +267,23 @@ Alex L. Wang
 &amp; w + c \leq 60 &amp;&amp; \\
 &amp; w,c\geq 0 &amp;&amp;
 \end{aligned}\]</span></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src=".png"></p>
-</div></div>
 <ul>
-<li><span class="alert">Optimal solution does not change</span></li>
+<li><span class="highlight">Optimal solution does not change</span></li>
 <li>What is the change in optimal value? <span class="math display">\[\begin{aligned}
 &amp;\text{(change in unit profit wheat)} \times \text{(acres of wheat in opt. sol.)}\\
 &amp;= 100 \times 20 = 2000
 \end{aligned}\]</span></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/fresh_farms_graphical_solution_objective2.png" class="quarto-figure quarto-figure-center" alt="Graphical solution of Fresh Farms problem. The slope of the objective function line is -300/300."></p>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="behavior-under-large-change-in-objective-coefficient" class="slide level2">
 <h2>Behavior under “large” change in objective coefficient</h2>
-<p>Changing the coefficient in the objective function changes the slope of the objective function line</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="math display">\[\begin{aligned}
@@ -284,22 +293,25 @@ Alex L. Wang
 &amp; w + c \leq 60 &amp;&amp; \\
 &amp; w,c\geq 0 &amp;&amp;
 \end{aligned}\]</span></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src=".png"></p>
-</div></div>
 <ul>
-<li><span class="alert">Optimal solution changes</span></li>
+<li><span class="highlight">Optimal solution changes</span></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fig/fresh_farms_graphical_solution_objective3.png" class="quarto-figure quarto-figure-center" alt="Graphical solution of Fresh Farms problem. The slope of the objective function line is -600/300."></p>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="what-did-we-see" class="slide level2">
 <h2>What did we see?</h2>
 <ul>
-<li>If change in objective coefficient is small enough, then optimal solution does not change and we can determine the change in optimal value</li>
-<li>How small is small enough?</li>
-<li>Sensitivity Report</li>
+<li><span class="highlight">If change in objective coefficient is small enough, then optimal solution does not change and we can determine the change in optimal value</span></li>
+<li>How small is small enough? See the Sensitivity Report</li>
 </ul>
 
-<img data-src=".png" class="r-stretch"></section>
+<img data-src="fig/fresh_farms_sensitivity_report.png" class="quarto-figure quarto-figure-center r-stretch" alt="Sensitivity Report for the Fresh Farms Problem"></section>
 <section id="objective-function-coefficient-range-of-optimality" class="slide level2">
 <h2>Objective function coefficient: Range of optimality</h2>
 <ul>
@@ -307,8 +319,8 @@ Alex L. Wang
 <ul>
 <li>In Sensitivity Report, each variable has an Objective Coefficient, Allowable Increase, and Allowable Decrease</li>
 <li>The Range of Optimality is an interval on the number line, e.g., think <span class="math inline">\([0,2]\)</span>, <span class="math inline">\([-1,0.5]\)</span>, <span class="math inline">\([500,\infty)\)</span></li>
-<li>The left endpoint is: Objective coefficient - Allowable Decrease</li>
-<li>The right endpoint is: Objective coefficient + Allowable Increase</li>
+<li>The left endpoint is: <span class="highlight">Objective coefficient - Allowable Decrease</span></li>
+<li>The right endpoint is: <span class="highlight">Objective coefficient + Allowable Increase</span></li>
 </ul></li>
 <li><strong>Sensitivity Analysis Fact 1</strong>. If the only thing that changes in an LP model is the coefficient of one decision variable and the new coefficient is in the range of optimality, then <strong>the optimal solution stays the same</strong>.</li>
 </ul>
@@ -382,14 +394,14 @@ Alex L. Wang
 <section id="changing-one-constraint-rhs-1" class="slide level2">
 <h2>Changing one constraint RHS</h2>
 <ul>
-<li>Suppose we change the fertilizer availability and re-solve the LP for each possible value of the RHS. We would see the following plot:
+<li>Suppose we change the fertilizer availability and re-solve the LP for each possible value of the RHS. We would see the plot below
 <ul>
 <li>Near the current RHS, the optimal total profit varies linearly.</li>
 <li>We can learn most of this information from the sensitivity report without re-solving</li>
 </ul></li>
 </ul>
 
-<img data-src=".png" class="r-stretch"></section>
+<img data-src="fig/parameter_analysis_ff_fertilizer_availability.png" class="quarto-figure quarto-figure-center r-stretch" alt="Plot showing how Optimal Total Profit varies as a function of fertilizer availability. The graph shows an increasing function that curves downwards."></section>
 <section id="original-model-1" class="slide level2">
 <h2>Original Model</h2>
 <p>Changing a constraint RHS changes the position (but not the slope) of a constraint</p>
@@ -402,14 +414,13 @@ Alex L. Wang
 &amp; w + c \leq 60 &amp;&amp; \\
 &amp; w,c\geq 0 &amp;&amp;
 \end{aligned}\]</span></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src=".png"></p>
-</div></div>
 <p><strong>Binding constraints</strong>: fertilizer and labor</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="fig/fresh_farms_graphical_sol.png" alt="Graphical solution of Fresh Farms problem."></p>
+</div></div>
 </section>
 <section id="behavior-under-small-change-in-constraint-rhs" class="slide level2">
 <h2>Behavior under “small” change in constraint RHS</h2>
-<p>Changing a constraint RHS changes the position (but not the slope) of a constraint</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="math display">\[\begin{aligned}
@@ -419,14 +430,14 @@ Alex L. Wang
 &amp; w + c \leq 60 &amp;&amp; \\
 &amp; w,c\geq 0 &amp;&amp;
 \end{aligned}\]</span></p>
+<p><strong>Binding constraints</strong>: <span class="highlight">still fertilizer and labor!</span></p>
+<p>Which constraints are binding have not changed</p>
 </div><div class="column" style="width:50%;">
-<p><img data-src=".png"></p>
+<p><img data-src="fig/fresh_farms_graphical_solution_constraint_2.png" alt="Graphical solution of Fresh Farms problem with fertilizer availability increased to 160."></p>
 </div></div>
-<p><strong>Binding constraints</strong>: <span class="alert">still fertilizer and labor!</span></p>
 </section>
 <section id="behavior-under-large-change-in-constraint-rhs" class="slide level2">
 <h2>Behavior under “large” change in constraint RHS</h2>
-<p>Changing a constraint RHS changes the position (but not the slope) of a constraint</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="math display">\[\begin{aligned}
@@ -436,20 +447,19 @@ Alex L. Wang
 &amp; w + c \leq 60 &amp;&amp; \\
 &amp; w,c\geq 0 &amp;&amp;
 \end{aligned}\]</span></p>
+<p><span class="highlight">Binding constraints have changed</span></p>
 </div><div class="column" style="width:50%;">
-<p><img data-src=".png"></p>
+<p><img data-src="fig/fresh_farms_graphical_solution_constraint_3.png" alt="Graphical solution of Fresh Farms problem with fertilizer availability increased to 300."></p>
 </div></div>
-<p>Binding constraints have changed</p>
 </section>
 <section id="what-did-we-see-1" class="slide level2">
 <h2>What did we see?</h2>
 <ul>
-<li>If the change is small enough, then which constraints are binding/not binding do not change</li>
-<li>How small is small enough?</li>
-<li>Sensitivity Report</li>
+<li><span class="highlight">If the change is small enough, then which constraints are binding/not binding do not change</span></li>
+<li>How small is small enough? See the Sensitivity Report</li>
 </ul>
 
-<img data-src=".png" class="r-stretch"></section>
+<img data-src="fig/fresh_farms_sensitivity_report.png" class="quarto-figure quarto-figure-center r-stretch" alt="Sensitivity Report for the Fresh Farms Problem"></section>
 <section id="constraint-rhs-range-of-feasibility" class="slide level2">
 <h2>Constraint RHS: Range of feasibility</h2>
 <ul>
@@ -457,8 +467,8 @@ Alex L. Wang
 <ul>
 <li>In Sensitivity Report, each constraint has a Constraint R.H. Side, Allowable Increase, Allowable Decrease</li>
 <li>The Range of Feasibility is an interval on the number line, e.g., think <span class="math inline">\([0,2]\)</span>, <span class="math inline">\([-1,0.5]\)</span>, <span class="math inline">\([500,\infty)\)</span></li>
-<li>The left endpoint is: Constraint R.H.S - Allowable Decrease</li>
-<li>The right endpoint is: Constraint R.H.S + Allowable Increase</li>
+<li>The left endpoint is: <span class="highlight">Constraint R.H.S - Allowable Decrease</span></li>
+<li>The right endpoint is: <span class="highlight">Constraint R.H.S + Allowable Increase</span></li>
 </ul></li>
 <li><strong>Sensitivity Analysis Fact 3</strong>. If the only thing that changes in an LP model is the RHS of one constraint and the new RHS is in the range of feasibility, then <strong>which constraints are binding do not change</strong></li>
 </ul>
@@ -521,8 +531,11 @@ Alex L. Wang
 <h2>Predicting the new optimal value</h2>
 <ul>
 <li><strong>Sensitivity Analysis Fact 5</strong>. Suppose change in constraint RHS is in range of feasibility. Then, <span class="math display">\[\text{(change in opt val)} = \text{(change in RHS)} \times \text{(shadow price)}\]</span></li>
-<li><strong>Shadow price</strong> is the marginal value of an extra unit of resource within the range of feasibility</li>
+<li><strong>Shadow price</strong> is the <span class="highlight">marginal value of an extra unit of resource</span> currently
+<ul>
+<li>This shadow price remains valid within the range of feasibility</li>
 <li>This number is calculated by the solver in the sensitivity report</li>
+</ul></li>
 <li>Shadow price of a non-binding constraint will be zero (why?)</li>
 </ul>
 </section>
