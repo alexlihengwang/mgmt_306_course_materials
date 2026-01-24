@@ -1,0 +1,134 @@
+---
+title: "Responses to Week 2 Poll Questions"
+subtitle: MGMT 306
+author: Alex L. Wang
+date: "2026-01-23"
+format:
+  html:
+    toc: true
+    html-math-method: mathjax
+jupyter: julia-1.11
+---
+
+- **If an LP model has alternate optimal solutions, and Solver only outputs one, how will we be able to see and evaluate the multiple solutions?**
+
+  This is a great question. You won't be able to detect this from just looking at the solution that Solver produces. However, this is something you can detect by inspecting the Sensitivity Report. We will discuss this next week.
+
+- **Why do we care about the slack of a constraint or whether or not a constraint is binding? In order to find the slack you already have to know what the optimal solution is, and since the optimal solution is really all we're looking for, why does slack matter?**
+  
+  I would disagree with the premise that the optimal solution is _all we're looking for_. For example, in the Fresh Farms problem, we find that the optimal solution is to produce 20 acres of wheat and 20 acres of corn for a profit of $10,000. Inspecting the slack and binding-ness of each constraint tells you information about the **resources** and which are **economically scarce**:
+    - The land constraint $w + c \leq 60$ is non-binding and has a slack of 20. What this means is that we have 20 more acres of land than we optimally want to use. We are happy to sell off up to 20 acres of land at any price and would not want to purchase any additional land. Land is not **economically scarce**.
+    - The fertilizer constraint $2 w + 4c \leq 120$ is binding. This says that this resource **economically scarce**. This is one of the constraints _preventing_ us from making more profit. If we want to increase our profit, one way to do it is to acquire more fertilizer.
+    - The labor constraint $3 w + 2c \leq 100$ is binding. This says that this resource **economically scarce**. This is one of the constraints _preventing_ us from making more profit. If we want to increase our profit, one way to do it is to acquire more labor. 
+
+  We will see more of this next week in the Sensitivity Analysis lectures.
+
+
+
+```{julia}
+#| echo: false
+#| warning: false
+#| message: false
+
+using Plots
+using LaTeXStrings
+
+# polygon (closed)
+poly = [(0,0), (100/3,0), (20,20), (0,30)]
+poly_closed = vcat(poly, poly[1])
+xs = first.(poly_closed)
+ys = last.(poly_closed)
+
+my_polygon = Shape(xs, ys)
+
+p = plot(my_polygon;
+    aspect_ratio=:equal,
+    label="",
+    xlabel="acres of wheat to plant (w)", ylabel="acres of corn to plant (c)",
+    grid=true,
+    framestyle = :origin
+)
+
+plot!(
+    [0,1000/200],[1000/300,0]; label=L"200x+300y=1000"
+)
+plot!(
+    [0,2000/200],[2000/300,0]; label=L"200x+300y=2000"
+)
+plot!(
+    [0,3000/200],[3000/300,0]; label=L"200x+300y=3000"
+)
+plot!(
+    [0,4000/200],[4000/300,0]; label=L"200x+300y=4000"
+)
+plot!(
+    [0,5000/200],[5000/300,0]; label=L"200x+300y=5000"
+)
+plot!(
+    [0,6000/200],[6000/300,0]; label=L"200x+300y=6000"
+)
+plot!(
+    [0,7000/200],[7000/300,0]; label=L"200x+300y=7000"
+)
+plot!(
+    [0,8000/200],[8000/300,0]; label=L"200x+300y=8000"
+)
+plot!(
+    [0,9000/200],[9000/300,0]; label=L"200x+300y=9000"
+)
+plot!(
+    [0,10000/200],[10000/300,0]; label=L"200x+300y=10000"
+)
+plot!(
+    [0,11000/200],[11000/300,0]; label=L"200x+300y=11000"
+)
+plot!(
+    [0,12000/200],[12000/300,0]; label=L"200x+300y=12000"
+)
+plot!(
+    [0,13000/200],[13000/300,0]; label=L"200x+300y=13000"
+)
+
+savefig(p, "fig/plot_with_objective_lines.svg");
+
+p = plot(my_polygon;
+    aspect_ratio=:equal,
+    label="",
+    xlabel="acres of wheat to plant (w)", ylabel="acres of corn to plant (c)",
+    grid=true,
+    framestyle = :origin
+)
+
+plot!(
+    [0,8000/200],[8000/300,0]; label=L"200x+300y=8000"
+)
+
+savefig(p, "fig/plot_with_objective_line_8000.svg");
+```
+
+- In the graphical solution method, after plotting the feasible region, how do you find the optimal solution?
+
+    The feasible region shows what points are feasible but not what points are optimal. To find the optimal solution, the key is to understand that the objective function will be constant on lines that cover the entire plane (page).
+
+    Below is a picture of the feasible region for the Fresh Farms LP with different objective function lines. Note that they are parallel to each other and that the objective function increases/decreases in the direction perpendicular to the line.
+
+    ![](fig/plot_with_objective_lines.svg){fig-alt="Feasible region with many objective function lines."}
+
+    When you do this by hand, you will only plot a single objective function line corresponding to some value (any value you pick is fine). Then you will compare that objective function line with a point not on the line. You will use that other point to determine whether the objective function improves or worsens when going to the left/right. For example, if we had only plotted the objective function line corresponding to 8000, we would get the plot below:
+
+    ![](fig/plot_with_objective_line_8000.svg){fig-alt="Feasible region with objective function line corresponding to 8000."}
+
+    The objective function line through $(0,0)$ has objective value equal to $200\cdot 0 + 300\cdot 0 = 0$. Thus, in this problem, the objective function lines correspond to larger values of the objective function as you move to the right. This is a maximization problem, so we want to find the objective function line furthest to the right that intersects our feasible region. Using a straightedge, we can move this objective function line parallel to right until we find the line furthest to the right that intersects the feasible region.
+    
+    This allows you to see in the figure that the optimal solution should lie at the intersection of the fertilizer and labor constraint boundaries. That is, those two constraints are binding. The optimal solution $(w, c)$ satisfies
+
+    $$\begin{aligned}
+        2x+4y &= 120\\
+        3x + 2y &= 100
+    \end{aligned}$$
+
+    Then, the rest is algebra. We use the second constraint to write $2y = 100 - 3x$ so that $120 = 2x+4y = 2x + 2(2y) = 2x + 200 - 6x$. This gives us $4x = 80$ or $x = 20$ and $y=20$.
+    
+- **How do you determine the constraints in an LP model?**
+
+    We will get a lot of practice over the course of the semester. The main suggestion is to read over the prompt carefully and to think about what decisions should be disallowed. For example, if you read "Fresh Farms has 60 acres of land", then you should think to yourself that we cannot plant more than 60 acres of crops. Or, if we are told that we have a finite supply of a resource, that will naturally impose a restriction on some of your decisions.

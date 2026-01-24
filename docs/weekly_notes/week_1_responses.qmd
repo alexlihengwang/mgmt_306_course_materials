@@ -1,0 +1,71 @@
+---
+title: "Responses to Week 1 Poll Questions"
+subtitle: MGMT 306
+author: Alex L. Wang
+date: "2026-01-16"
+format:
+  html:
+    toc: true
+    html-math-method: mathjax
+---
+
+- **What are the steps to formulating a model? How do we make sure we get all the constraints?**
+    
+    We will get a lot of practice in this course. Here are the general steps/questions you can ask yourself:
+
+    - What variables do you have control over? These will be your decision variables. There should be one variable for each number that needs to be decided.
+    - How do we measure if one solution (remember, this is an \emph{assignment of values to variables}) is better than another? This will be your objective function. Remember to write $\max$ or $\min$ indicating whether the goal is to maximize or minimize this objective.
+    - Carefully think about your business context and formulate any relevant constraints. In this course, this corresponds to reading the problem description carefully. If need be, re-read the problem description to see if there is any relevant data that you have not yet included. Don't forget to add nonnegativity constraints if they are necessary for your problem.
+
+
+- **Why are integer constraints not allowed in an LP model?**
+    
+    This is a definition. Remember, an LP model is a model where the objective is a linear function and each constraint is a standard form linear constraint. 
+    
+    In the CustomBikes model, we had constraints that said
+
+    $$s \text{ is an integer}\qquad\text{and}\qquad m \text{ is an integer}$$
+    
+    That is, the number of single-speed and multi-speed bikes we produce need to be integers (whole numbers).
+    These constraints are not standard form linear constraints. Thus, we cannot call the model for CustomBikes a LP model.
+    It is a perfectly valid _model_, just not an _LP model_.
+
+    Analogy: A vegetarian pizza is a pizza where each topping is vegetarian. If you added pepperoni to it, it would no longer be a vegetarian pizza.
+
+- **How do we know when to include integer constraints?**
+
+    First, for this class:
+    If we give you a situation where it would be natural to include integer constraints and we say "Build/write a model for this situation", then you should include the integer constraints.
+    We will be explicit when you should ignore the integer constraints. For example, if we want you to ignore the integer constraints in the CustomBikes model, we would say "Build/write an LP model for the CustomBikes problem." The "LP" here is an adjective and indicates that we want a model without integer constraints.
+
+    In the future, beyond this class, you would first try to solve the more accurate model with integer constraints. If you are able to coax the computer into giving you a solution, then great, you've solved an accurate model of your problem. If the computer is unable to give you a solution (for example, if it would take too long), then you could try the less accurate model without integer constraints.
+
+- **How do we find the optimal solution to a Linear Program?**
+
+    We have so far only discussed how to form models for our problems but have not yet discussed how to solve them to find optimal solutions.
+    We will see how to do this manually (by hand) in Week 2 and then automatically (by Excel) in Week 3 and beyond.
+
+
+- **Can you explain the chairs tables ratio constraint in the Oak Works problem?**
+
+    Let $C$ represent the number of chairs to produce and let $T$ represent the number of tables to produce.
+
+    We want to write a constraint corresponding to "produce at least twice as many chairs as tables".
+    In other words, for each table we produce, we need to produce at least two chairs.
+    This constraint imposes a minimum number of chairs in our production plan. We are allowed to produce as many chairs as we want, as long as we clear some minimum threshold. So the constraint should have the form
+
+    $$C \geq  \text{something}$$
+
+    for some expression on the right. How many chairs must we produce at minimum? 
+    If we produce zero tables, we need at least zero chairs.
+    If we produce one table, we need at least two chairs. If we produce two tables, we need at least four chairs. Hopefully, you see that the expression on the right increments by $2$ every time we increment $T$ by 1. Thus, we get the constraint:
+    $$C\geq 2T$$
+
+    Now, we want to write this constraint as a standard form linear constraint.
+    We do this by subtracting $2T$ from either side of $C \geq 2T$. This gives us:
+
+    $$C - 2T \geq 0$$
+
+- **Can there be multiple objectives in a model?**
+    
+    A model, by definition, must have exactly one objective function. At the very end of the course we will talk about how to write models for situations where you might have an ordered list of metrics. In that setting, we will one metric to be the objective function and additional metrics for tie-breaking.
