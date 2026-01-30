@@ -1,0 +1,12 @@
+.highlight {
+  --col: #ffeb51;           /* default highlight color */
+  background: var(--col, #fff);
+  padding: .1em;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.reveal table th,
+.reveal table td {
+  padding: .2em .5em; /* Adjust padding as needed */
+}
