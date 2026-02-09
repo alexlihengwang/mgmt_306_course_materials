@@ -549,8 +549,139 @@ Alex L. Wang
 </tr>
 </tbody>
 </table>
-
 </section></section>
+<section>
+<section id="cash-flow-planning" class="title-slide slide level1 center" data-background-color="#40666e">
+<h1>Cash Flow Planning</h1>
+
+</section>
+<section id="problem-description-3" class="slide level2">
+<h2>Problem Description</h2>
+<ul>
+<li><p>Riverbend Capital Partners (RCP) is planning its investments for the next three years</p></li>
+<li><p>Currently, RCP has $2.5M available for investment</p></li>
+<li><p>RCP expects the following income stream from previous investments 1, 2, and 3 years from now:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>End of Year</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Income ($M)</td>
+<td>$0.9</td>
+<td>$0.75</td>
+<td>$0.6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>There are three projects that RCP may participate in (fully or fractionally). Each project has projected cash flows for full participation.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>End of Year</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Project A Cash Flow</td>
+<td>-3.6</td>
+<td>-0.9</td>
+<td>0.7</td>
+<td>6.0</td>
+</tr>
+<tr class="even">
+<td>Project B Cash Flow</td>
+<td>-1.6</td>
+<td>0.4</td>
+<td>0.5</td>
+<td>2.1</td>
+</tr>
+<tr class="odd">
+<td>Project C Cash Flow</td>
+<td>-2.7</td>
+<td>-1.5</td>
+<td>1.1</td>
+<td>6.7</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</section>
+<section id="problem-description-continued-1" class="slide level2">
+<h2>Problem Description (continued)</h2>
+<ul>
+<li>RCP can borrow money at 8% interest per year, but cannot borrow more than $2M at any point in time</li>
+<li>RCP can also invest surplus funds at 5% per year</li>
+<li>Use an LP model to maximize ending wealth at the end of three years</li>
+</ul>
+</section>
+<section id="variables" class="slide level2">
+<h2>Variables</h2>
+<p><span class="math display">\[\begin{aligned}
+&amp;x_A&amp;&amp;\text{participation in Project A}\\
+&amp;x_B&amp;&amp;\text{participation in Project B}\\
+&amp;x_C&amp;&amp;\text{participation in Project C}\\
+&amp;y_0&amp;&amp;\text{amount invested at end of year 0}\\
+&amp;y_1&amp;&amp;\text{amount invested at end of year 1}\\
+&amp;y_2&amp;&amp;\text{amount invested at end of year 2}\\
+&amp;z_0&amp;&amp;\text{amoung borrowed at end of year 0}\\
+&amp;z_1&amp;&amp;\text{amoung borrowed at end of year 1}\\
+&amp;z_2&amp;&amp;\text{amoung borrowed at end of year 2}\\
+&amp;w &amp;&amp; \text{wealth at end of year 3}
+\end{aligned}\]</span></p>
+</section>
+<section id="lp-model" class="slide level2">
+<h2>LP Model</h2>
+<ul>
+<li>Objective: <span class="math display">\[\max\qquad w \qquad\text{(wealth at end of year 3)}\]</span></li>
+<li>Constraints: <span class="math display">\[\begin{aligned}
+&amp;x_A \leq 1 &amp;\text{(participation in Project A)}\\
+&amp;x_B \leq 1 &amp;\text{(participation in Project B)}\\
+&amp;x_C \leq 1 &amp;\text{(participation in Project C)}\\
+&amp;z_0 \leq 2 &amp;\text{(maximum loan amount year 0)}\\
+&amp;z_1 \leq 2 &amp;\text{(maximum loan amount year 1)}\\
+&amp;z_2 \leq 2 &amp;\text{(maximum loan amount year 2)}\\
+&amp;\text{all variables }\geq 0
+\end{aligned}\]</span>
+<ul>
+<li>Still missing balance constraints</li>
+</ul></li>
+</ul>
+</section>
+<section id="cash-flow-picture" class="slide level2">
+<h2>Cash Flow Picture</h2>
+
+<img data-src="1-5fig/cash_flow_balance.png" class="quarto-figure quarto-figure-center r-stretch" alt="Diagram showing cash flows entering and exiting each node: beginning of year 0, end of year 1, end of year 2, end of year 3."></section>
+<section id="lp-model-balance-constraints" class="slide level2">
+<h2>LP Model Balance Constraints</h2>
+<p><span class="math display">\[\begin{aligned}
+&amp;2.5 + z_0 = 3.6x_A + 1.6 x_B + 2.7 x_C + y_0 &amp;\text{(Balance 0)}\\
+&amp;0.9+0.4x_B +1.05y_0+z_1 = 0.9x_A + 1.5 x_C + y_1 + 1.08z_0&amp;\text{(Balance 1)}\\
+&amp;0.75 + 0.7x_A + 0.5 x_B + 1.1 x_C+ 1.05 y_1 + z_2  = y_2+1.08z_1&amp;\text{(Balance 2)}\\
+&amp;0.6 + 6 x_A + 2.1 x_B + 6.7 x_C + 1.05 y_2 = 1.08 z_2 + w &amp;\text{(Balance 3)}
+\end{aligned}\]</span></p>
+<p><strong>Note</strong>: Not yet in standard form.</p>
+</section>
+<section id="completed-excel-spreadsheet" class="slide level2">
+<h2>Completed Excel Spreadsheet</h2>
+
+
+<img data-src="1-5fig/cash_flow_completed.png" class="quarto-figure quarto-figure-center r-stretch" alt="Completed Excel workbook for cash flow planning problem."></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
